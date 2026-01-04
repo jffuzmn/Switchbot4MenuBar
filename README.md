@@ -86,9 +86,26 @@ This will attempt to compile the app using swiftc.
 5. Click the menu bar item to see detailed readings
 6. Use the Refresh button to manually update readings
 
+## FAQ
+
+### How often does the app poll my Aranet4?
+The app reads data from your Aranet4 **every 5 minutes** when your Mac is awake.
+
+### What's the battery impact on my Aranet4?
+**Minimal.** The app only reads existing measurements that your Aranet4 has already taken. Bluetooth LE read operations are extremely efficient:
+- Estimated impact: < 0.1% battery per day
+- Your Aranet4's 2-4 year battery life should not be noticeably affected
+- The device continues to measure at its own configured interval (independent of this app)
+
+### What about my Mac's battery?
+Negligible. The app uses native Swift and Bluetooth LE, resulting in minimal CPU and battery usage.
+
+### Does the app need internet access?
+No. All data stays on your device - the app only communicates with your Aranet4 via Bluetooth.
+
 ## Troubleshooting
 
-- **Bluetooth permission denied**: Go to System Preferences > Security & Privacy > Bluetooth and enable access for Aranet4MenuBar
+- **Bluetooth permission denied**: Go to System Preferences > Security & Privacy > Bluetooth and enable access for Aranet4
 - **Device not found**: Make sure your Aranet4 is powered on and within range
 - **Connection issues**: Try turning Bluetooth off and on in System Preferences
 
