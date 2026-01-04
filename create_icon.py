@@ -22,7 +22,7 @@ sizes = [
 svg_template = '''<?xml version="1.0" encoding="UTF-8"?>
 <svg width="{size}" height="{size}" xmlns="http://www.w3.org/2000/svg">
   <rect width="{size}" height="{size}" fill="white" rx="{radius}"/>
-  <text x="50%" y="50%"
+  <text x="50%" y="48%"
         font-family="SF Pro, Helvetica, Arial, sans-serif"
         font-size="{fontsize}"
         font-weight="500"
