@@ -2,8 +2,7 @@
 
 A native macOS menu bar application that displays real-time air quality readings from your Aranet4 device via Bluetooth.
 
-![Menu Bar Screenshot](https://via.placeholder.com/400x100?text=Menu+Bar+Screenshot)
-*Screenshot placeholder - add your own screenshot here*
+![Aranet4 Menu Bar App](screenshots/readme-image.jpeg)
 
 ## Features
 
