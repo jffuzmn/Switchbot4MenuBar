@@ -40,6 +40,12 @@ echo "Creating app bundle..."
 # Copy Info.plist
 cp Info.plist "$APP_BUNDLE/Contents/"
 
+# Copy icon
+if [ -f "Aranet4.icns" ]; then
+    cp Aranet4.icns "$APP_BUNDLE/Contents/Resources/"
+    echo "Icon added"
+fi
+
 # Create PkgInfo
 echo "APPL????" > "$APP_BUNDLE/Contents/PkgInfo"
 

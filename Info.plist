@@ -14,6 +14,8 @@
     <string>Aranet4</string>
     <key>CFBundleDisplayName</key>
     <string>Aranet4</string>
+    <key>CFBundleIconFile</key>
+    <string>Aranet4</string>
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
