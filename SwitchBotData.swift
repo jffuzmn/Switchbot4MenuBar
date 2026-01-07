@@ -64,19 +64,20 @@ struct SwitchBotReading {
         dataLogger.info("Device type: 0x\(String(format: "%02x", deviceType))")
         
         // SwitchBot Meter Pro CO2 (W4900010) format - 18 bytes
-        // Device types: 0x18, 0x19, 0x1e observed
+        // Device types observed: 0x18, 0x19, 0x1e, 0x54
         // Format after manufacturer ID and MAC:
         //   Byte 8:  Device type/flags
         //   Byte 9:  Battery % (0x64 = 100%)
         //   Byte 10: Temperature decimal (divide by 10)
         //   Byte 11: Temperature integer + 128 offset
-        //   Byte 12: Humidity %
+        //   Byte 12: Humidity % (may have high bit flag, mask with 0x7F)
         //   Byte 13: (unknown)
         //   Byte 14: (unknown) 
         //   Byte 15: CO2 high byte
         //   Byte 16: CO2 low byte
         //   Byte 17: (unknown)
         
+        // Accept any device type for 18-byte SwitchBot packets from this MAC pattern
         if data.count >= 17 {
             let battery = Int(data[9])
             
@@ -85,8 +86,8 @@ struct SwitchBotReading {
             let tempDecimal = Double(data[10]) / 10.0
             let temperature = Double(tempInteger) + tempDecimal
             
-            // Humidity: byte 12
-            let humidity = Int(data[12])
+            // Humidity: byte 12 (mask with 0x7F to remove any flag bits)
+            let humidity = Int(data[12] & 0x7F)
             
             // CO2: bytes 15-16, big-endian
             let co2 = (Int(data[15]) << 8) | Int(data[16])
