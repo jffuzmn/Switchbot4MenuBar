@@ -201,9 +201,9 @@ struct SwitchBotReading {
 
     // Get CO2 level status
     var co2Status: CO2Level {
-        if co2 < 800 {
+        if co2 < 1000 {
             return .good
-        } else if co2 < 1200 {
+        } else if co2 < 1400 {
             return .moderate
         } else {
             return .poor
@@ -214,9 +214,9 @@ struct SwitchBotReading {
 // MARK: - CO2 Level Status
 
 enum CO2Level {
-    case good      // < 800 ppm
-    case moderate  // 800-1199 ppm
-    case poor      // >= 1200 ppm
+    case good      // < 1000 ppm
+    case moderate  // 1000-1399 ppm
+    case poor      // >= 1400 ppm
 
     var color: String {
         switch self {

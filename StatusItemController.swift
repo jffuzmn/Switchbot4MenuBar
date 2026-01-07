@@ -87,7 +87,7 @@ class StatusItemController: ObservableObject {
             if let reading = reading {
                 // Change text color to red only when CO2 is critically high
                 let title = reading.menuBarText
-                if reading.co2 >= 1200 {
+                if reading.co2 >= 1400 {
                     // High CO2 - red text
                     let attributes: [NSAttributedString.Key: Any] = [
                         .foregroundColor: NSColor.systemRed,

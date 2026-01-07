@@ -53,9 +53,9 @@ open build/SwitchBotCO2.app
 
 | Level | CO₂ (ppm) | Indicator | Recommendation |
 |-------|-----------|-----------|----------------|
-| Good | < 800 | 🟢 Green | Air quality is excellent |
-| Moderate | 800-1199 | 🟡 Yellow | Consider ventilating |
-| Poor | ≥ 1200 | 🔴 Red | Open windows immediately |
+| Good | 400-999 | 🟢 Green | Air quality is excellent |
+| Moderate | 1000-1399 | 🟡 Yellow | Consider ventilating |
+| Poor | ≥ 1400 | 🔴 Red | Open windows immediately |
 
 ## Troubleshooting
 

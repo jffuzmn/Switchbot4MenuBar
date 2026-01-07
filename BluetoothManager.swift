@@ -54,7 +54,7 @@ class BluetoothManager: NSObject, ObservableObject {
     private let staleDataTimeout: TimeInterval = 300 // 5 minutes without data = stale
 
     // Alert settings
-    private var co2AlertThreshold: Int = 1200 // ppm
+    private var co2AlertThreshold: Int = 1400 // ppm
     private var hasAlertedForHighCO2: Bool = false
     private var gentleAlertSound: NSSound?
     private var urgentAlertSound: NSSound?
