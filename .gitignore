@@ -1,6 +1,12 @@
-# Build artifacts
+# Build output
 build/
 *.app
+*.zip
+
+# macOS
+.DS_Store
+*.swp
+*~
 
 # Xcode
 *.xcodeproj
@@ -8,13 +14,5 @@ build/
 xcuserdata/
 DerivedData/
 
-# Swift
-*.swiftmodule
-*.swiftdoc
-
-# macOS
-.DS_Store
-*.pch
-
-# Debug files
-aranet4_debug.txt
+# Debug logs
+*.log

@@ -51,7 +51,7 @@ struct SettingsView: View {
             }
             .padding(.horizontal, 12)
 
-            Text("Plays when CO2 reaches 1200 ppm or higher")
+            Text("Plays when CO₂ reaches 1200 ppm or higher")
                 .font(.caption)
                 .foregroundColor(.secondary)
                 .padding(.horizontal, 20)

@@ -16,7 +16,7 @@ class StatusItemController: ObservableObject {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem.button {
-            button.title = "Air Quality"
+            button.title = "CO₂ Monitor"
             button.action = #selector(togglePanel)
             button.target = self
         }
@@ -73,7 +73,7 @@ class StatusItemController: ObservableObject {
             .store(in: &cancellables)
     }
 
-    private func updateMenuBarTitle(with reading: Aranet4Reading?, status: ConnectionStatus? = nil) {
+    private func updateMenuBarTitle(with reading: SwitchBotReading?, status: ConnectionStatus? = nil) {
         guard let button = statusItem.button else { return }
 
         let currentStatus = status ?? bluetoothManager.connectionStatus
@@ -83,9 +83,7 @@ class StatusItemController: ObservableObject {
             button.title = "❌ Disconnected"
         case .scanning:
             button.title = "🔍 Scanning..."
-        case .connecting:
-            button.title = "🔄 Connecting..."
-        case .connected:
+        case .receiving:
             if let reading = reading {
                 // Change text color to red only when CO2 is critically high
                 let title = reading.menuBarText
@@ -168,7 +166,7 @@ class StatusItemController: ObservableObject {
             backing: .buffered,
             defer: false
         )
-        window.title = "Aranet4 Settings"
+        window.title = "SwitchBot CO₂ Settings"
         window.contentViewController = hostingController
         window.isReleasedWhenClosed = false
         window.level = .floating

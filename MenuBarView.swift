@@ -8,7 +8,7 @@ struct MenuBarView: View {
         VStack(alignment: .leading, spacing: 12) {
             // Header
             HStack {
-                Text("Aranet4 Air Quality")
+                Text("SwitchBot CO₂ Monitor")
                     .font(.headline)
                 Spacer()
                 ConnectionStatusView(status: bluetoothManager.connectionStatus)
@@ -31,7 +31,7 @@ struct MenuBarView: View {
             if let reading = bluetoothManager.currentReading {
                 ReadingsView(reading: reading)
             } else {
-                Text("No data available")
+                Text("Searching for SwitchBot Meter Pro CO₂...")
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity, alignment: .center)
                     .padding()
@@ -76,30 +76,18 @@ struct MenuBarView: View {
                     .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
-                .disabled(bluetoothManager.connectionStatus != .connected)
 
                 Button(action: {
-                    bluetoothManager.sendTestNotification()
+                    NSApplication.shared.terminate(nil)
                 }) {
                     HStack {
-                        Image(systemName: "bell")
-                        Text("Test Alert")
+                        Image(systemName: "xmark.circle")
+                        Text("Quit")
                     }
                     .frame(maxWidth: .infinity)
                 }
                 .buttonStyle(.bordered)
             }
-
-            Button(action: {
-                NSApplication.shared.terminate(nil)
-            }) {
-                HStack {
-                    Image(systemName: "xmark.circle")
-                    Text("Quit")
-                }
-                .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.bordered)
         }
         .padding()
         .frame(width: 300)
@@ -125,14 +113,14 @@ struct MenuBarView: View {
 }
 
 struct ReadingsView: View {
-    let reading: Aranet4Reading
+    let reading: SwitchBotReading
 
     var body: some View {
         VStack(spacing: 12) {
             // CO2 - most important
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("CO2")
+                    Text("CO₂")
                         .font(.caption)
                         .foregroundColor(.secondary)
                     HStack(alignment: .firstTextBaseline, spacing: 4) {
@@ -151,11 +139,11 @@ struct ReadingsView: View {
             .background(co2Background(reading.co2Status))
             .cornerRadius(8)
 
-            // Other readings
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+            // Other readings - 3 cards now (no pressure for SwitchBot)
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
                 ReadingCard(
                     icon: "thermometer",
-                    label: "Temperature",
+                    label: "Temp",
                     value: String(format: "%.1f°C", reading.temperature)
                 )
 
@@ -166,16 +154,20 @@ struct ReadingsView: View {
                 )
 
                 ReadingCard(
-                    icon: "gauge",
-                    label: "Pressure",
-                    value: String(format: "%.1f hPa", reading.pressure)
-                )
-
-                ReadingCard(
                     icon: "battery.100",
                     label: "Battery",
                     value: "\(reading.battery)%"
                 )
+            }
+            
+            // Signal strength (optional debug info)
+            HStack {
+                Image(systemName: "antenna.radiowaves.left.and.right")
+                    .foregroundColor(.secondary)
+                    .font(.caption2)
+                Text("Signal: \(reading.rssi) dBm")
+                    .font(.caption2)
+                    .foregroundColor(.secondary)
             }
         }
     }
@@ -208,10 +200,10 @@ struct ReadingCard: View {
                     .foregroundColor(.secondary)
             }
             Text(value)
-                .font(.system(size: 18, weight: .semibold))
+                .font(.system(size: 14, weight: .semibold))
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(10)
+        .padding(8)
         .background(Color.secondary.opacity(0.08))
         .cornerRadius(6)
     }
@@ -235,9 +227,9 @@ struct ConnectionStatusView: View {
         switch status {
         case .disconnected:
             return .red
-        case .scanning, .connecting:
+        case .scanning:
             return .orange
-        case .connected:
+        case .receiving:
             return .green
         }
     }
@@ -248,10 +240,8 @@ struct ConnectionStatusView: View {
             return "Disconnected"
         case .scanning:
             return "Scanning"
-        case .connecting:
-            return "Connecting"
-        case .connected:
-            return "Connected"
+        case .receiving:
+            return "Receiving"
         }
     }
 }
