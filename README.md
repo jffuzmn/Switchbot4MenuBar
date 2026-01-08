@@ -4,7 +4,7 @@ A lightweight macOS menu bar app that displays real-time CO₂, temperature, and
 
 Forked from [robjama/Aranet4MenuBar](https://github.com/robjama/Aranet4MenuBar)
 
-![Menu Bar Screenshot](screenshots/readme-screenshot.png)
+![Menu Bar Screenshot](screenshots/switchbot-screenshot.png)
 
 ## Features
 
