@@ -2,12 +2,14 @@
 
 A lightweight macOS menu bar app that displays real-time CO₂, temperature, and humidity readings from your **SwitchBot Meter Pro CO₂** (Model W4900010).
 
+Forked from [robjama/Aranet4MenuBar](https://github.com/robjama/Aranet4MenuBar)
+
 ![Menu Bar Screenshot](screenshots/readme-screenshot.png)
 
 ## Features
 
 - **Real-time monitoring** - CO₂, temperature, humidity, and battery in your menu bar
-- **Visual alerts** - Menu bar turns red when CO₂ exceeds 1200 ppm
+- **Visual alerts** - Menu bar turns red when CO₂ exceeds 1400 ppm
 - **Notifications** - Get alerted when air quality becomes unhealthy
 - **No cloud required** - Reads directly from your device via Bluetooth LE
 - **Lightweight** - Native macOS app, minimal resource usage
